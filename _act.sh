@@ -24,14 +24,18 @@ function _act() {
 
   commands=(
     'exe: Execute an actiona script'
+    'detail: Show actions detail of an actiona script'
     'list: List available actiona scripts'
   )
 
   get_scripts_location
+
+  # ------- Script list for exe
   # Replacing all "/" of scripts paths with "\/" so that sed will understand them afterwards
   remove_from_path_for_sed=`echo $actiona_scripts_location | sed 's/\//\\\\\//g'`
-  
   actiona_scripts=(`find $actiona_scripts_location/ -type f -name "*.ascr" | sed "s/^$remove_from_path_for_sed//g" | sed "s/^\///g"`)
+  # -------
+
 
   local target=$words[2]
   _arguments -C \
@@ -45,6 +49,9 @@ function _act() {
       second_arg)
         case $target in
           exe)
+            _describe -t actiona_scripts "Actiona scripts" actiona_scripts && ret=0
+            ;;
+          detail)
             _describe -t actiona_scripts "Actiona scripts" actiona_scripts && ret=0
             ;;
           *)

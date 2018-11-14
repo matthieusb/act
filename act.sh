@@ -16,10 +16,11 @@ act_print_usage() {
 Usage: act [command]
 
 Commands:
-    exe <script>    Execute an actiona script without any actiona window opening
-    list            Display available scripts
+    exe    <script>    Execute an actiona script without any actiona window opening
+    detail <script>    Detail script actions (If comments are mentioned)
+    list               Display available scripts
 
-    help            Show this extremely helpful text
+    help               Show this extremely helpful text
 EOF
 }
 
@@ -37,6 +38,11 @@ act_display_scripts() {
 
   # Removing the script path from the list of available scripts
   find $actiona_scripts_location/ -type f -name "*.ascr" | sed "s/^$remove_from_path_for_sed//g" | sed "s/^\///g"
+}
+
+act_detail_script() {
+  # TODO
+  echo "Work in Progress"
 }
 
 get_scripts_location() {
@@ -63,16 +69,20 @@ else
         case "$o"
             in
             -e|--exe|exe)
-                act_exec_script $2
-                break
-                ;;
+              act_exec_script $2
+              break
+              ;;
+            -d|--detail|detail)
+              act_detail_script $2
+              break
+              ;;
             -l|--list|list)
-                act_display_scripts
-                break
-                ;;
+              act_display_scripts
+              break
+              ;;
             --)
-                break
-                ;;
+              break
+              ;;
         esac
     done
   fi
