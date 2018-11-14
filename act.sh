@@ -31,7 +31,12 @@ act_exec_script() {
 act_display_scripts() {
   echo "Scripts available in $actiona_scripts_location: "
   echo "-----"
-  ls "$actiona_scripts_location" | grep --color=never .ascr
+
+  # Replacing all "/" of scripts paths with "\/" so that sed will understand them afterwards
+  remove_from_path_for_sed=`echo $actiona_scripts_location | sed 's/\//\\\\\//g'`
+
+  # Removing the script path from the list of available scripts
+  find $actiona_scripts_location/ -type f -name "*.ascr" | sed "s/^$remove_from_path_for_sed//g" | sed "s/^\///g"
 }
 
 get_scripts_location() {

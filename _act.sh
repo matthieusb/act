@@ -28,10 +28,12 @@ function _act() {
   )
 
   get_scripts_location
-  actiona_scripts=(`ls $actiona_scripts_location | grep .ascr`)
+  # Replacing all "/" of scripts paths with "\/" so that sed will understand them afterwards
+  remove_from_path_for_sed=`echo $actiona_scripts_location | sed 's/\//\\\\\//g'`
+  
+  actiona_scripts=(`find $actiona_scripts_location/ -type f -name "*.ascr" | sed "s/^$remove_from_path_for_sed//g" | sed "s/^\///g"`)
 
   local target=$words[2]
-
   _arguments -C \
     '1: :->first_arg' \
     '2: :->second_arg' && ret=0
