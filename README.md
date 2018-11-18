@@ -9,7 +9,15 @@ This plugin aims at making things easier to call actiona scripts from your comma
 
 ## Installation
 
-act is not bundled with zsh, so you need to clone it. Go to your *oh-my-zsh* folder and then in *custom/plugins* and clone this repository:
+act is not bundled with ZSH, so you need to install it.
+
+### [Antigen](https://github.com/zsh-users/antigen)
+
+This plugin can be installed by adding `antigen bundle matthieusb/act` to your `.zshrc` file. [Antigen](https://github.com/zsh-users/antigen) will handle cloning the plugin for you automatically the next time you start `zsh`. You can also add the plugin to a running ZSH session with `antigen bundle matthieusb/act` for testing before adding it to your `.zshrc`.
+
+### [Oh-My-Zsh](http://ohmyz.sh/)
+
+Go to your *oh-my-zsh* folder and then in *custom/plugins* and clone this repository:
 
 ```
 git clone https://github.com/matthieusb/act.git
@@ -21,9 +29,13 @@ And then, add to to your *.zshrc* plugin list like this:
 plugins=(... act)
 ```
 
+### [Zgen](https://github.com/tarjoilija/zgen)
+
+This plugin can be installed by adding `zgen load matthieusb/act` to your `.zshrc` file in the same function you're doing your other `zgen load` calls in. [Zgen](https://github.com/tarjoilija/zgen) will automatically clone the repositories for you when you do a `zgen save`.
+
 ## Usage
 
-The act plugins looks for scripts to execute in *~/.actiona_scripts*. To override this, you can set the **ACTIONA_SCRIPTS** environment variable.
+The `act` plugins looks for scripts to execute in *~/.actiona_scripts*. To override this, you can set the **ACTIONA_SCRIPTS** environment variable.
 
 Act can be used using the following commands:
 
